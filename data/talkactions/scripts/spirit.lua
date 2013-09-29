@@ -6,7 +6,6 @@ local myOutfit = getCreatureOutfit(cid)
 
 local config = {
 		efeito = 48,
-		storage = 120,
 		mensagemon = "Spirit mode!",
 		mensagemoff = "Normal mode!",
 		outfitAirbender = 2,
@@ -15,7 +14,7 @@ local config = {
 }
 
 	if(param ~= "" and spiriton[param]) then
-		if getPlayerStorageValue(cid, config.storage) <= 0 then
+		if getPlayerStorageValue(cid, SPIRIT_STORAGE) <= 0 then
 			if isInRange(getThingPos(cid), {x=1114,y=1091,z=8}, {x=1116,y=1093,z=8}) then
 				if myOutfit.lookType == 410 or myOutfit.lookType == 387 then
 					if getPlayerSex(cid) == 0 then
@@ -23,7 +22,7 @@ local config = {
 					else
 						doSetCreatureOutfit(cid, config.outfitAirbenderMale, -1)
 					end
-					setPlayerStorageValue(cid, config.storage, 1)
+					setPlayerStorageValue(cid, SPIRIT_STORAGE, 1)
 					doCreatureSay(cid, config.mensagemon, TALKTYPE_ORANGE_1)
 					doSendMagicEffect(getCreaturePosition(cid), config.efeito)
 				end
@@ -34,10 +33,10 @@ local config = {
 			doPlayerSendCancel(cid,"You already are spirit.")
 		end
 	elseif(param ~= "" and spiritoff[param]) then
-		if getPlayerStorageValue(cid, config.storage) >= 1 then
+		if getPlayerStorageValue(cid, SPIRIT_STORAGE) >= 1 then
 			if isInRange(getThingPos(cid), {x=1114,y=1091,z=8}, {x=1116,y=1093,z=8}) then
 				doRemoveCondition(cid, CONDITION_OUTFIT)
-				setPlayerStorageValue(cid, config.storage, 0)
+				setPlayerStorageValue(cid, SPIRIT_STORAGE, 0)
 				doCreatureSay(cid, config.mensagemoff, TALKTYPE_ORANGE_1)
 			else
 				doPlayerSendCancel(cid,"You can't turn off the Spirit mode here.")
